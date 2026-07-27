@@ -40,6 +40,13 @@
   <div class="ticket" id="ticket"></div>
 </div>
 
-<script src="app.js"></script>
+<script>
+  // 動態載入 app.js 並加上時間戳，避免瀏覽器/GitHub Pages 快取到舊版
+  (function(){
+    var s=document.createElement("script");
+    s.src="app.js?t="+Date.now();
+    document.body.appendChild(s);
+  })();
+</script>
 </body>
 </html>
