@@ -123,6 +123,12 @@ fetch("venues.json?t="+Date.now())
   .then(v=>{ VENUES=v; })
   .catch(()=>{})
   .finally(()=>{
-    const now=new Date();
-    showMonth(now.getFullYear(), now.getMonth());
+    // 網址帶 ?ym=YYYY-MM 就開該月份，否則顯示今天所在月份
+    const m=/^(\d{4})-(\d{1,2})$/.exec(new URLSearchParams(location.search).get("ym")||"");
+    if(m){
+      showMonth(Number(m[1]), Number(m[2])-1);
+    }else{
+      const now=new Date();
+      showMonth(now.getFullYear(), now.getMonth());
+    }
   });
