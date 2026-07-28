@@ -48,6 +48,26 @@ h1{margin:0;font-size:26px;font-weight:800;letter-spacing:.02em}
   width:34px;height:34px;font-size:18px;cursor:pointer;color:var(--ink);
 }
 
+/* 複製場外活動按鈕 */
+.exportbtn{
+  margin-left:auto;border:1.5px solid var(--ink);background:var(--card);
+  border-radius:999px;padding:7px 14px;font-size:13px;font-weight:700;
+  color:var(--ink);cursor:pointer;font-family:inherit;
+}
+.exportbtn:hover{background:var(--ink);color:#fff}
+
+/* 場外活動輸出視窗 */
+.exportbox{width:min(420px,92vw);background:var(--card);border-radius:16px;padding:18px 18px 14px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.exporthead{font-size:18px;font-weight:800;margin-bottom:10px}
+#exportText{
+  width:100%;height:230px;resize:vertical;border:1px solid var(--line);
+  border-radius:10px;padding:12px;font-size:14px;line-height:1.6;
+  font-family:inherit;color:var(--ink);background:#fff;
+}
+.exportbox .mapbtn{margin-top:12px}
+.exportbox .closebtn{display:block;margin:6px auto 0}
+.copied{background:#0B6E4F !important}
+
 /* 月曆 */
 /* .weekdays,.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px} */
 .weekdays,.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}

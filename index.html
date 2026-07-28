@@ -24,6 +24,7 @@
     <button class="navbtn" id="prev">‹</button>
     <div class="label" id="monthLabel"></div>
     <button class="navbtn" id="next">›</button>
+    <button class="exportbtn" id="exportBtn">📋 複製場外活動</button>
   </div>
 
   <div class="weekdays">
@@ -38,6 +39,16 @@
 <!-- 詳情票根 -->
 <div class="overlay" id="overlay">
   <div class="ticket" id="ticket"></div>
+</div>
+
+<!-- 場外活動輸出 -->
+<div class="overlay" id="exportOverlay">
+  <div class="exportbox">
+    <div class="exporthead">場外活動</div>
+    <textarea id="exportText" readonly></textarea>
+    <button class="mapbtn" id="copyBtn">複製文字</button>
+    <button class="closebtn" id="exportClose">關閉</button>
+  </div>
 </div>
 
 <script>

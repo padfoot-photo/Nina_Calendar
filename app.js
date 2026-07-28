@@ -116,6 +116,47 @@ function nav(dir){
 document.getElementById("prev").onclick=()=>nav(-1);
 document.getElementById("next").onclick=()=>nav(1);
 
+// ── 一鍵輸出當月場外（非球賽）活動 ─────────────
+function buildOffFieldText(){
+  const list = events
+    .filter(e=>e.team==="其他")
+    .sort((a,b)=>a.date.localeCompare(b.date));
+  if(!list.length) return "";
+  const mmdd = d => { const p=d.split("-"); return `${Number(p[1])}/${p[2]}`; };
+  const lines = [`穎樂${month+1}月的場外活動`, "時間先留起來💕", ""];
+  list.forEach(e=>{
+    lines.push(`${mmdd(e.date)} ${e.icon?e.icon+" ":""}${e.title}`);
+    lines.push(`地點：${e.venue}`);
+    lines.push(`時間：${e.time||"未定"}`);
+    lines.push("");
+  });
+  return lines.join("\n").trim();
+}
+function openExport(){
+  const text = buildOffFieldText();
+  if(!text){ alert(`${month+1} 月沒有場外活動`); return; }
+  document.getElementById("exportText").value = text;
+  const btn=document.getElementById("copyBtn");
+  btn.textContent="複製文字"; btn.classList.remove("copied");
+  document.getElementById("exportOverlay").classList.add("open");
+}
+function closeExport(){ document.getElementById("exportOverlay").classList.remove("open"); }
+document.getElementById("exportBtn").onclick=openExport;
+document.getElementById("exportClose").onclick=closeExport;
+document.getElementById("exportOverlay").addEventListener("click", ev=>{
+  if(ev.target.id==="exportOverlay") closeExport();
+});
+document.getElementById("copyBtn").onclick=()=>{
+  const ta=document.getElementById("exportText");
+  const done=()=>{ const b=document.getElementById("copyBtn"); b.textContent="已複製 ✓"; b.classList.add("copied"); };
+  ta.select();
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(ta.value).then(done).catch(()=>{ document.execCommand("copy"); done(); });
+  }else{
+    document.execCommand("copy"); done();
+  }
+};
+
 // ── 啟動 ─────────────────────────────────────
 renderLegend();
 fetch("venues.json?t="+Date.now())
