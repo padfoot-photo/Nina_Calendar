@@ -126,7 +126,8 @@ function buildOffFieldText(){
   const lines = [`穎樂${month+1}月的場外活動`, "時間先留起來💕", ""];
   list.forEach(e=>{
     lines.push(`${mmdd(e.date)} ${e.icon?e.icon+" ":""}${e.title}`);
-    lines.push(`地點：${e.venue}`);
+    const addr = e.address || VENUES[e.venue] || "";
+    lines.push(`地點：${e.venue}${addr?`（${addr}）`:""}`);
     lines.push(`時間：${e.time||"未定"}`);
     lines.push("");
   });
