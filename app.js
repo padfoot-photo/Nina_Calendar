@@ -127,7 +127,7 @@ function buildOffFieldText(){
   list.forEach(e=>{
     lines.push(`${mmdd(e.date)} ${e.icon?e.icon+" ":""}${e.title}`);
     const addr = e.address || VENUES[e.venue] || "";
-    lines.push(`地點：${e.venue}${addr?`（${addr}）`:""}`);
+    if(e.venue) lines.push(`地點：${e.venue}${addr?`（${addr}）`:""}`);
     lines.push(`時間：${e.time||"未定"}`);
     if(e.link) lines.push(`活動網站：${e.link}`);
     lines.push("");
