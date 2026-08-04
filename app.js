@@ -70,7 +70,8 @@ function render(){
 function openTicket(e){
   const dow=WEEKDAYS[new Date(e.date+"T00:00:00").getDay()];
   const addr = e.address || VENUES[e.venue] || "";
-  const maps="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(addr||e.venue);
+  const place = addr || e.venue;   // 有地址或地點才能在地圖上搜尋
+  const maps="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(place);
   const rows=[
     // ["連結", e.link],
     ["時間", e.time||"未定"],
@@ -88,7 +89,7 @@ function openTicket(e){
     <div class="body">
     <!-- Write information in rows. Skip in no info. -->
       ${rows.map(r=>`<div class="row"><div class="k">${r[0]}</div><div class="v">${r[1]}</div></div>`).join("")} 
-      <a class="mapbtn" href="${maps}" target="_blank" rel="noreferrer"> 在 Google Maps 開啟</a>
+      ${place ? `<a class="mapbtn" href="${maps}" target="_blank" rel="noreferrer"> 在 Google Maps 開啟</a>` : ""}
       ${e.link ? `<a class="eventlink" href="${e.link}" target="_blank" rel="noreferrer"> 活動連結 </a>`: ""}
       <button class="closebtn" onclick="closeTicket()">關閉</button>
     </div>`;
