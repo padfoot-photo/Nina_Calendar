@@ -120,7 +120,7 @@ document.getElementById("next").onclick=()=>nav(1);
 // ── 一鍵輸出當月場外（非球賽）活動 ─────────────
 function buildOffFieldText(){
   const list = events
-    .filter(e=>e.team==="其他")
+    .filter(e=>!(e.title||"").includes("球賽"))
     .sort((a,b)=>a.date.localeCompare(b.date));
   if(!list.length) return "";
   const mmdd = d => { const p=d.split("-"); return `${Number(p[1])}/${p[2]}`; };
